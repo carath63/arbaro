@@ -77,7 +77,7 @@ class MeshPartCreator {
 			if (! sections.hasMoreElements()) {
 				// last section - close mesh with normal in z-direction
 				
-				if (section.getRadius()>0.000001) {
+				if (section.getRadius()>0.00000001) {
 					createMidPoint(section,1);
 				}
 				

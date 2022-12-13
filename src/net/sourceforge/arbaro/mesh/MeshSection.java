@@ -60,15 +60,20 @@ public class MeshSection extends java.util.Vector {
 		}
 		
 		public boolean hasMoreElements() {
+			/* This is incorrect with the new uv vertex enumeration
 			return (i==0 && size()==1) || (i<=size() && size()>1);
+			*/
+			return (i < size());
 		}
 		
 		public Object nextElement() {
-			if (i<size())
+			if (i<size()) {
 				return ((Vertex)elementAt(i++)).uv;
-			else if (i==size() && size()>1) {
+			/* This no longer works if you use the face_indices to get UV vectors
+			} else if (i==size() && size()>1) {
 				i++;
 				return new UVVector(1.0,mapV);
+			*/
 			} else 
 				throw new NoSuchElementException();
 		}

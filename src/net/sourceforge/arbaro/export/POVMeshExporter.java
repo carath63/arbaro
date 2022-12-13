@@ -423,7 +423,11 @@ class POVMeshExporter extends MeshExporter {
 
 
 		// output uv faces
-		if (outputStemUVs) {
+		/* Remove this since we are now dumping all of the UV Vectors
+		 * in the same order as the Vertex vectors
+		 */
+		//if (outputStemUVs) {
+		if (false) {
 			/*offset = 0;*/
 			w.println(indent + "  uv_indices {  " + face_cnt);
 			writeStemFaces(true/*,indent*/);

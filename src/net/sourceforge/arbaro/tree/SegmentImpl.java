@@ -313,7 +313,7 @@ class SegmentImpl implements StemSection {
 		double rad = this.rad1;
 		
 		// if radius = 0 create only one point
-		if (rad<0.000001) {
+		if (rad<0.00000001) {
 			points = new Vector[1];
 			points[0] = trf.apply(new Vector(0,0,0));
 		} else { //create pt_cnt points

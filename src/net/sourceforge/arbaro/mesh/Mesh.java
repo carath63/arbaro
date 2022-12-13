@@ -74,6 +74,10 @@ public class Mesh extends java.util.Vector {
 		}
 	}
 
+	/* Replace this with a version that enumerates all of the UVVertex objects, not
+	 * just the ones from the first part of each level
+	 */
+	/*
 	private class UVVertexEnumerator implements Enumeration {
 		private int level;
 		private Enumeration partVertices;
@@ -96,6 +100,32 @@ public class Mesh extends java.util.Vector {
 			}
 			return partVertices.nextElement();
 		}
+	}
+	*/
+	
+	private class UVVertexEnumerator implements Enumeration {
+		private Enumeration parts;
+		private Enumeration partVertices;
+		
+		public UVVertexEnumerator() {
+			parts		= elements();
+			partVertices = ((MeshPart)parts.nextElement()).allVertices(true);
+		}
+		
+		public boolean hasMoreElements() {
+			if (! partVertices.hasMoreElements() && parts.hasMoreElements()) {
+				partVertices = ((MeshPart)parts.nextElement()).allVertices(true);
+			}
+			return partVertices.hasMoreElements();
+		}
+		
+		public Object nextElement() {
+			if (! partVertices.hasMoreElements() && parts.hasMoreElements()) {
+				partVertices = ((MeshPart)parts.nextElement()).allVertices(true);
+			}
+			return partVertices.nextElement();
+		}
+		
 	}
 	
 	
@@ -266,8 +296,15 @@ public class Mesh extends java.util.Vector {
 	public int uvCount()  {
 		int cnt = 0;
 		
+		/* Count the uv indices from each mesh part, not just the first at each level
+		 */
+		/*
 		for (int i=0; i<firstMeshPart.length; i++) {
 			cnt += ((MeshPart)elementAt(firstMeshPart[i])).uvCount();
+		}
+		*/
+		for (int i = 0; i<size(); i++) {
+			cnt += ((MeshPart)elementAt(i)).uvCount();
 		}
 		return cnt;
 	}

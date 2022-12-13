@@ -254,6 +254,7 @@ public class MeshPart extends java.util.Vector {
 	 * @return the number of uv vectors for the mesh part
 	 */
 	public int uvCount() {
+		/* This is no longer correct with the updated uv vectors
 		int cnt=0;
 		
 		for (int i = 1; i<size(); i++) {
@@ -261,6 +262,8 @@ public class MeshPart extends java.util.Vector {
 					1 : ((MeshSection)elementAt(i)).size()+1;
 		}
 		return cnt;
+		*/
+		return this.vertexCount();
 	}
 	
 	
